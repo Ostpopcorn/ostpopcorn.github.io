@@ -15,16 +15,16 @@ Since my discovery of `PariedDelimiter` from the `mathtools` package, I have tri
 The core of my commands are the wrapper functions that uses `PairedDelimiter`s.
 For my parenthesis I want a `\given` command that should spawn a vertical bar matching the surrounding parentesis.
 
-Here, we define the vertical bar
-```latex
+First, we define the vertical bar symbol using `\SetSymbol` and `\given`. Then we define the main wrapper command `\gullwingsparenthesis`. This implementation is a bit overkill, but it allows for linebreaks in the argument when using the non-starred version.
+
+<details open>
+<summary>Gullwings parenthesis</summary>
+
+{% highlight latex %}
 \NewDocumentCommand\SetSymbol{o}{% raw %}{%{% endraw %}
     \nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}%
 }
 \NewDocumentCommand\given{}{\SetSymbol[]}
-```
-
-This is a tad overkill, but this allows for linebreaks in the agrument when using no star.
-```latex
 \makeatletter
 \NewDocumentCommand\gullwingsparenthesis{sD{<}{>}{\BooleanFalse}O{}m}{% raw %}{%{% endraw %}
     % If either * or the <\BooleanTrue> is set we do the starred version.
@@ -39,10 +39,9 @@ This is a tad overkill, but this allows for linebreaks in the agrument when usin
 \DeclarePairedDelimiter\gullwingsparenthesis@nostar{\{}{\}}
 \DeclarePairedDelimiterX\gullwingsparenthesis@star[1]{\{}{\}}
     {\RenewDocumentCommand\given{}{\SetSymbol[\delimsize]}#1}
-
 \makeatother
-```
-We can now repeat this process for other types of parenthesis we like. 
+{% endhighlight %}
+</details>
 
 <details>
 <summary>Soft parenthesis</summary>
@@ -86,7 +85,13 @@ We can now repeat this process for other types of parenthesis we like.
 {% endhighlight %}
 </details>
 
-We can now easily define operators
+<div style="background-color: #fff8dc; border-left: 4px solid #ffd700; padding: 12px 16px; margin: 16px 0; border-radius: 4px;">
+  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+    <span style="font-size: 1.2em;">💡</span>
+    <strong>We can now easily define operators!</strong>
+  </div>
+</div>
+
 ## Probability
 Basic expectation
 {% highlight latex %}

@@ -1,0 +1,62 @@
+
+%% Complex
+\DeclareMathOperator{\I}{\mathsf{j}}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+% Absolute value
+\DeclarePairedDelimiter\abs{\vert}{\vert}
+
+% Scalar product
+\DeclarePairedDelimiterX\scalarprod[2]{\langle}{\rangle}{#1,\mathopen{}#2}
+% Floor and Ceil
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% Notation for a set
+\NewDocumentCommand\set{O{}m}{\gullwingsparenthesis[#1]{#2}}
+
+
+\newcommand{\minX}[1]{\ensuremath{\min\set{#1}}}
+\newcommand{\maxX}[1]{\ensuremath{\max\set{#1}}}
+
+% Minimization and maximization
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+
+\newcommand{\maximize}{\mathop{\rm maximize}\limits}
+\newcommand{\minimize}{\mathop{\rm minimize}\limits}
+
+
+%% Vector and matrix notation
+\newcommand{\matr}[1]{{\mathbf{#1}}}
+\newcommand{\vect}[1]{{\bm{#1}}}
+
+\newcommand{\transpose}{^{\mkern-1.5mu\mathsf{T}}}
+\newcommand{\hermitian}{^{\mathsf{H}}} %Hermitian transpose
+
+\newcommand{\onevec}[1]{\mathbf{1}\subscriptifnonempty{#1}}
+\newcommand{\zerovec}[1]{\mathbf{0}\subscriptifnonempty{#1}}
+
+\newcommand{\indicator}[1]{\mathbbx{1}\subscriptifnonempty{#1}}
+
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+%%% Distributions
+\newcommand{\rayleigh}[1]{{\text{Rayleigh}\left( #1 \right)}}
+\newcommand{\expdistribution}[1]{{\text{Exp}\left( #1 \right)}}
+\newcommand{\bernoulli}[1]{{\text{Bernoulli}\left( #1 \right)}}
+
+\newcommand{\N}[2]{{\mathcal{N}\left( #1,#2 \right)}}
+\newcommand{\CN}[2]{{\mathcal{CN}\left( #1,#2 \right)}}
+
+%% Domains
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complexes}{\mathbb{C}}
+\newcommand{\rationals}{\mathbb{Q}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\integers}{\mathbb{Z}}
+
+%%% Minor relevance, but fun
+\def\shrug{\texttt{\raisebox{0.75em}{\char`\_}\char`\\\char`\_\kern-0.5ex(\kern-0.25ex\raisebox{0.25ex}{\rotatebox{45}{\raisebox{-.75ex}"\kern-1.5ex\rotatebox{-90})}}\kern-0.5ex)\kern-0.5ex\char`\_/\raisebox{0.75em}{\char`\_}}}
