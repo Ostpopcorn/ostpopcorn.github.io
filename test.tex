@@ -1,0 +1,101 @@
+
+\documentclass{article}
+
+
+\usepackage{amssymb,amsmath,amsfonts}
+\usepackage{amsthm,thmtools}
+\usepackage{bm,bbm}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{etoolbox}
+
+% just to make sure it exists
+\NewDocumentCommand\SetSymbol{o}{%
+    \nonscript\:#1\vert
+    \allowbreak
+    \nonscript\:
+    \mathopen{}
+}
+
+\NewDocumentCommand\given{}{\SetSymbol[]}
+\makeatletter
+\NewDocumentCommand\gullwingsparenthesis{sD{<}{>}{\BooleanFalse}O{}m}{%
+    % If either * or the <\BooleanTrue> is set we do the starred version.
+    \IfBooleanTF{#1}% Check if star is set
+    {\gullwingsparenthesis@star*{#4}}% Star
+        {\IfBooleanTF{#2}% Check is star is passed using <...>
+            {\gullwingsparenthesis@star*{#4}}% Star
+        {\RenewDocumentCommand\given{}{\SetSymbol[#3]}%
+            \gullwingsparenthesis@nostar[#3]{#4}}% Nostar
+    }%
+}
+\DeclarePairedDelimiter\gullwingsparenthesis@nostar{\{}{\}}
+\DeclarePairedDelimiterX\gullwingsparenthesis@star[1]{\{}{\}}
+    {\RenewDocumentCommand\given{}{\SetSymbol[\delimsize]}#1}
+
+\NewDocumentCommand\softparenthesis{sD{<}{>}{\BooleanFalse}O{}m}{%
+    % If either * or the <\BooleanTrue> is set we do the starred version.
+    \IfBooleanTF{#1}% Check if star is set
+    {\softparenthesis@star*{#4}}% Star
+    {\IfBooleanTF{#2}% Check is star is passed using <...>
+        {\softparenthesis@star*{#4}}% Star
+        {\RenewDocumentCommand\given{}{\SetSymbol[#3]}%
+            \softparenthesis@nostar[#3]{#4}}% Nostar
+    }%
+}
+\DeclarePairedDelimiter\softparenthesis@nostar{(}{)}
+\DeclarePairedDelimiterX\softparenthesis@star[1]{(}{)}
+{\RenewDocumentCommand\given{}{\SetSymbol[\delimsize]}#1}
+
+\NewDocumentCommand\squareparenthesis{sD{<}{>}{\BooleanFalse}O{}m}{ %
+    % If either * or the <\BooleanTrue> is set we do the starred version.
+    \IfBooleanTF{#1}% Check if star is set
+    {\squareparenthesis@star*{#4}}% Star
+    {\IfBooleanTF{#2}% Check is star is passed using <...>
+        {\squareparenthesis@star*{#4}}% Star
+        {\RenewDocumentCommand\given{}{\SetSymbol[#3]}%
+            \squareparenthesis@nostar[#3]{#4}}% Nostar
+    }%
+}
+\DeclarePairedDelimiter\squareparenthesis@nostar{[}{]}
+\DeclarePairedDelimiterX\squareparenthesis@star[1]{[}{]}
+{\RenewDocumentCommand\given{}{\SetSymbol[\delimsize]}#1}
+
+\makeatother
+
+
+\NewDocumentCommand{\E}{o}{\mathbb{E}\IfValueT{#1}{_{#1}}}
+% \DeclareMathOperator{\E}{\mathbb{E}}
+\NewDocumentCommand{\EX}{soO{}m}{\E[#2]\mathopen{}\gullwingsparenthesis<#1>[#3]{#4}}
+
+
+\NewDocumentCommand\Var{o}{\text{Var}\IfValueT{#1}{_{#1}}}
+\NewDocumentCommand\VarX{soO{}m}{\Var[#2]\mathopen{}\gullwingsparenthesis<#1>[#3]{#4}}
+\NewDocumentCommand\Cov{o}{\text{Cov}\IfValueT{#1}{_{#1}}}
+\NewDocumentCommand\CovX{soO{}m}{\Cov[#2]\mathopen{}\gullwingsparenthesis<#1>[#3]{#4}}
+
+\NewDocumentCommand\caligraphiccommand{D{<}{>}{\BooleanFalse}mom}{\ensuremath{#2\mathopen{}\softparenthesis<#1>[#3]{\ifstrempty{#4}{\cdot}{#4}}}}%
+
+
+\newcommand{\cC}{\mathcal{C}}
+\NewDocumentCommand\cCX{sO{}m}{\caligraphiccommand<#1>{\cC}[#2]{#3}}
+
+\begin{document}
+hej
+
+$$
+\gullwingsparenthesis{hej\given6}
+$$
+\begin{align}
+    \EX[a]{\frac{1}{2}},\EX[a][\Big]{\frac{1}{2}}, \EX*[a]{\frac{1}{2}}
+\end{align}
+\begin{align}
+\EX[a]{\frac{1}{2}\given1},\EX[a][\Big]{\frac{1}{2}\given2}, \EX*[a]{\frac{1}{2}\given3}
+\end{align}
+
+\begin{align}
+    \CovX[a][\Big]{\frac{1}{2}\given1\\2\nonumber\\3}
+\end{align}
+
+$$\cCX*{1+2\frac{1}{2}}$$
+\end{document}
