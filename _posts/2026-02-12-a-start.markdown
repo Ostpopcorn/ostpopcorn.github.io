@@ -1,0 +1,6 @@
+---
+layout: post
+title:  "Start of something"
+date:   2026-02-12 15:42:14 +0100
+---
+Everything has to start with something somewhere, and this is mine!
