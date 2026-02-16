@@ -17,8 +17,6 @@ To use these macros, add the following to your LaTeX preamble:
 \usepackage{etoolbox}       % Programming tools (\ifstrempty, etc.)
 {% endhighlight %}
 
-**Note:** The special vectors section uses `\subscriptifnonempty` and `\mathbbx` which may need to be defined separately or come from additional packages like `bbm` or `dsfont`.
-
 ## Custom Delimiters
 
 I tend to write my own LaTeX macros to make writing reports easier.
@@ -201,9 +199,11 @@ Vector and matrix notation
 
 Special vectors
 {% highlight latex %}
-\newcommand{\onevec}[1]{\mathbf{1}\subscriptifnonempty{#1}}
-\newcommand{\zerovec}[1]{\mathbf{0}\subscriptifnonempty{#1}}
-\newcommand{\indicator}[1]{\mathbbx{1}\subscriptifnonempty{#1}}
+\DeclareMathAlphabet{\mathbbx}{U}{BOONDOX-ds}{b}{n}
+
+\newcommand{\onevec}[1]{\mathbf{1}\IfValueT{#1}{_{#1}}}
+\newcommand{\zerovec}[1]{\mathbf{0}\IfValueT{#1}{_{#1}}}
+\newcommand{\indicator}[1]{\mathbbx{1}\IfValueT{#1}{_{#1}}}
 {% endhighlight %}
 
 Matrix operations

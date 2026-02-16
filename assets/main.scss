@@ -4,13 +4,103 @@
 
 @import "minima";
 
+/* Custom header styling with color */
+.site-header {
+  background: linear-gradient(90deg, #1e5f99 0%, #0c8599 50%, #00a896 75%, #02c39a 100%);
+  border-top: none;
+  border-bottom: 3px solid #00a896;
+}
+
+.site-title,
+.site-title:visited {
+  color: #ffffff !important;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.site-title:hover {
+  color: #f0f0f0 !important;
+  text-decoration: none;
+}
+
+.site-nav .page-link {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+.site-nav .page-link:hover {
+  color: #f0f0f0 !important;
+  text-decoration: underline;
+}
+
+/* Mobile menu button */
+.site-nav .menu-icon > svg {
+  fill: #ffffff;
+}
+
+/* Code block styling */
+/* Inline code */
+code {
+  background: #f0f8ff;
+  color: #1e5f99;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+  border: 1px solid #d1e7f5;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+/* Code blocks */
+pre {
+  background: #f5f9fc;
+  border: 1px solid #00a896;
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+  box-shadow: 0 2px 4px rgba(0, 168, 150, 0.1);
+}
+
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #24292f;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+/* Syntax highlighting container */
+.highlight {
+  background: #f5f9fc;
+  border-radius: 6px;
+  margin: 16px 0;
+  border: 1px solid #00a896;
+  box-shadow: 0 2px 4px rgba(0, 168, 150, 0.1);
+}
+
+.highlight pre {
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Add accent color to line numbers */
+.highlight .lineno {
+  color: #0c8599;
+  padding-right: 12px;
+  border-right: 1px solid #d1e7f5;
+  margin-right: 12px;
+  user-select: none;
+}
+
 /* Custom styling for details elements */
 details {
   margin: 1.5em 0;
   padding: 0;
   border: 1px solid #e1e4e8;
   border-radius: 6px;
-  background: #f6f8fa;
+  background: #fafcfc;
   transition: all 0.3s ease;
 }
 
@@ -20,8 +110,8 @@ details:hover {
 }
 
 details[open] {
-  background: #ffffff;
-  border-color: #0969da;
+  background: #f5fbfa;
+  border-color: #00a896;
 }
 
 details summary {
@@ -58,12 +148,12 @@ details[open] summary::before {
 }
 
 details summary:hover {
-  background: rgba(9, 105, 218, 0.05);
-  color: #0969da;
+  background: rgba(0, 168, 150, 0.05);
+  color: #0c8599;
 }
 
 details summary:hover::before {
-  color: #0969da;
+  color: #00a896;
 }
 
 /* Content area styling */
@@ -128,23 +218,62 @@ details .highlight .copy-button {
 }
 
 .highlight .copy-button:hover {
-  background: #f6f8fa;
-  border-color: #0969da;
-  color: #0969da;
+  background: #f5fbfa;
+  border-color: #00a896;
+  color: #0c8599;
 }
 
 .highlight .copy-button:active {
-  background: #e6e9ed;
+  background: #e8f7f4;
   transform: scale(0.95);
 }
 
 .highlight .copy-button.copied {
-  background: #2da44e;
-  border-color: #2da44e;
+  background: #02c39a;
+  border-color: #02c39a;
   color: white;
 }
 
 .highlight .copy-button.copied::after {
+  content: ' ✓';
+}
+
+/* Copy All button styling */
+.copy-all-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 12px 20px;
+  background: #00a896;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.3);
+  transition: all 0.2s ease;
+  z-index: 1000;
+  user-select: none;
+}
+
+.copy-all-button:hover {
+  background: #0c8599;
+  box-shadow: 0 6px 16px rgba(0, 168, 150, 0.4);
+  transform: translateY(-2px);
+}
+
+.copy-all-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 168, 150, 0.3);
+}
+
+.copy-all-button.copied {
+  background: #02c39a;
+  box-shadow: 0 4px 12px rgba(2, 195, 154, 0.3);
+}
+
+.copy-all-button.copied::after {
   content: ' ✓';
 }
 
@@ -157,7 +286,7 @@ details .highlight .copy-button {
 
   details[open] {
     background: #0d1117;
-    border-color: #58a6ff;
+    border-color: #00a896;
   }
 
   details summary {
@@ -165,8 +294,8 @@ details .highlight .copy-button {
   }
 
   details summary:hover {
-    background: rgba(88, 166, 255, 0.1);
-    color: #58a6ff;
+    background: rgba(0, 168, 150, 0.1);
+    color: #02c39a;
   }
 
   details summary::before {
@@ -174,6 +303,14 @@ details .highlight .copy-button {
   }
 
   details summary:hover::before {
-    color: #58a6ff;
+    color: #00a896;
+  }
+
+  .copy-all-button {
+    background: #00a896;
+  }
+
+  .copy-all-button:hover {
+    background: #0c8599;
   }
 }
