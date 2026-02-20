@@ -24,7 +24,7 @@
 title: Adrian's Technical details
 email: adrian@ostpopcorn.se
 description: >- # this means to ignore newlines until "baseurl:"
-  I want to keep some thing accessible to myself so I made them public.
+  I want to keep some thing accessible to myself so I made them public!
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://ostpopcorn.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  ostpopcorn
