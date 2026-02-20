@@ -1,7 +1,7 @@
 ---
 layout: page
 title: LaTeX Tikz Macros
-permalink: /latex/math-macros/
+permalink: /latex/tikz-macros/
 ---
 
 More will come, but this is a good start
