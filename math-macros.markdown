@@ -1,7 +1,7 @@
 ---
 layout: page
 title: LaTeX Math Macros
-permalink: /latex/math-macros/
+permalink: /latex/tikz-macros/
 ---
 
 ## Required Packages
