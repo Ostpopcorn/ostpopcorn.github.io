@@ -2,7 +2,12 @@
 layout: page
 title: LaTeX Math Macros
 permalink: /latex/math-macros/
+copy_all_latex: true
 ---
+
+I tend to write my own $\LaTeX$ macros to make writing easier. Version managing these types of things can sometimes be pain when working in multiple repos. My solution is to just put the most up-to-date version here.
+
+
 
 ## Required Packages
 
@@ -19,7 +24,6 @@ To use these macros, add the following to your LaTeX preamble:
 
 ## Custom Delimiters
 
-I tend to write my own LaTeX macros to make writing reports easier.
 
 Since my discovery of `PariedDelimiter` from the `mathtools` package, I have tried to follow its style.
 
@@ -218,15 +222,11 @@ I also tend to use caligraphic letters as operators
 {% highlight latex %}
 \NewDocumentCommand\caligraphiccommand{D{<}{>}{\BooleanFalse}mom}{\ensuremath{#2\mathopen{}\softparenthesis<#1>[#3]{\ifstrempty{#4}{\cdot}{#4}}}}%
 {% endhighlight %}
-please note that this requires `etoolbox`.
+please note that this requires `etoolbox` package.
 
 Now it is simple to define:
 {% highlight latex %}
 \newcommand{\cC}{\mathcal{C}}
 \NewDocumentCommand\cCX{sO{}m}{\caligraphiccommand<#1>{\cC}[#2]{#3}}
 {% endhighlight %}
-
-# Tikz Macros
-Comming "soon"...
-
 

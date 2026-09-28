@@ -4,4 +4,6 @@
 
 layout: home
 ---
-Hejhej! 
+Hej!
+
+My name is Adrian and I'm a PhD at the Division of Communication Systems in Linköping, Sweden. 

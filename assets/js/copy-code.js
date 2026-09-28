@@ -1,7 +1,8 @@
 // Add copy buttons to all code blocks
 document.addEventListener('DOMContentLoaded', function() {
-  // Find all code blocks
-  const codeBlocks = document.querySelectorAll('.highlight');
+  // Find all code blocks. Fenced blocks mark both the wrapper and its <pre>
+  // with .highlight, so skip the <pre> to add one button per block
+  const codeBlocks = document.querySelectorAll('.highlight:not(pre)');
 
   codeBlocks.forEach(function(codeBlock) {
     // Create copy button

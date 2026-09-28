@@ -2,6 +2,7 @@
 layout: page
 title: LaTeX Tikz Macros
 permalink: /latex/tikz-macros/
+copy_all_latex: true
 ---
 
 More will come, but this is a good start

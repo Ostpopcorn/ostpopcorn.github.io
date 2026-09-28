@@ -1,7 +1,7 @@
 // Add a "Copy All" button for all LaTeX code blocks
 document.addEventListener('DOMContentLoaded', function() {
   // Find all LaTeX code blocks (highlighted code blocks)
-  const latexBlocks = document.querySelectorAll('.highlight');
+  const latexBlocks = document.querySelectorAll('.highlight:not(pre)');
 
   // Only show the button if there are multiple code blocks
   if (latexBlocks.length < 2) {
