@@ -43,6 +43,7 @@ I hacked together a web-based application that lets you run this fantastic tool 
 
 The app runs the original Python code via [Pyodide](https://pyodide.org) (Python compiled to WebAssembly), so **your .bib files never leave your browser**. The only outside request is optional: looking up arXiv categories for eprints sends the arXiv IDs to arXiv's public API.
 
+<p class="cta"><a class="cta-button" href="https://ostpopcorn.github.io/bibtex-tools/">Open BibTeX Tools in your browser →</a></p>
 
 ### Example workflow
 

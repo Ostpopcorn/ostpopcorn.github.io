@@ -277,6 +277,37 @@ details .highlight .copy-button {
   content: ' ✓';
 }
 
+/* Call-to-action button in posts */
+.cta {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.cta-button,
+.cta-button:visited {
+  display: inline-block;
+  padding: 16px 36px;
+  background: linear-gradient(90deg, #1e5f99 0%, #0c8599 50%, #00a896 100%);
+  color: #ffffff;
+  font-size: 1.25em;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.3);
+  transition: all 0.2s ease;
+}
+
+.cta-button:hover {
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(0, 168, 150, 0.4);
+  transform: translateY(-2px);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 168, 150, 0.3);
+}
+
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   details {
