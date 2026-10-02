@@ -21,10 +21,10 @@
 #  Write an awesome description for your new site here. You can edit this
 #  line in _config.yml. It will appear in your document head meta (for
 #  Google search results) and in your feed.xml site description.
-title: Adrian's Technical details
+title: Adrian's Technical Details
 email: adrian@ostpopcorn.se
 description: >- # this means to ignore newlines until "baseurl:"
-  I want to keep some thing accessible to myself so I made them public!
+  My common files and tools are publicly available to me, and therefore also to you!
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://ostpopcorn.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  ostpopcorn

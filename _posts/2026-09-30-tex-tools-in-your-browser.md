@@ -26,7 +26,9 @@ The tool follows my regex workflow, in four steps that you can turn on and off:
 
 These fours steps are not perfect, but did the job most of the time. 
 
-**You must always be careful when removing `%`, since they are used to supress spaces and line breaks. **
+Now, the python implementation found is the tool can handle a wider range of special cases, such as `\verb|...|` with `%` in the argument. 
+
+**You must always be careful when removing `%`, since they are used to supress spaces and line breaks.**
 
 
 ## TeX Tools in your browser
