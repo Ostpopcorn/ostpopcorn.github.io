@@ -1,0 +1,15 @@
+# Top navigation. Items with `children` become dropdown menus.
+- title: LaTeX
+  children:
+    - title: Math Macros
+      url: /latex/math-macros/
+    - title: Tikz Macros
+      url: /latex/tikz-macros/
+- title: Tools
+  children:
+    - title: BibTeX Tools
+      url: https://ostpopcorn.github.io/bibtex-tools/
+    - title: TeX Tools
+      url: https://ostpopcorn.github.io/tex-tools/
+- title: About
+  url: /about/

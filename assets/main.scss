@@ -4,32 +4,42 @@
 
 @import "minima";
 
+// Color palette
+$deep-blue: #1e5f99;
+$dark-teal: #0c8599;
+$teal: #00a896;
+$mint: #02c39a;
+$ink: #24292f;
+$teal-tint: #f5fbfa;
+$code-bg: #f5f9fc;
+$code-border-light: #d1e7f5;
+
 /* Custom header styling with color */
 .site-header {
-  background: linear-gradient(90deg, #1e5f99 0%, #0c8599 50%, #00a896 75%, #02c39a 100%);
+  background: linear-gradient(90deg, $deep-blue 0%, $dark-teal 50%, $teal 75%, $mint 100%);
   border-top: none;
-  border-bottom: 3px solid #00a896;
+  border-bottom: 3px solid $teal;
 }
 
 .site-title,
 .site-title:visited {
-  color: #ffffff !important;
+  color: #ffffff;
   font-weight: 600;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .site-title:hover {
-  color: #f0f0f0 !important;
+  color: #f0f0f0;
   text-decoration: none;
 }
 
 .site-nav .page-link {
-  color: #ffffff !important;
+  color: #ffffff;
   font-weight: 500;
 }
 
 .site-nav .page-link:hover {
-  color: #f0f0f0 !important;
+  color: #f0f0f0;
   text-decoration: underline;
 }
 
@@ -38,44 +48,241 @@
   fill: #ffffff;
 }
 
+/* Dropdown menus in the header */
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.nav-dropdown-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.nav-dropdown-toggle::after {
+  content: '▾';
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.8em;
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown:hover .nav-dropdown-toggle::after,
+.nav-dropdown:focus-within .nav-dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+/* Centered below its button */
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  z-index: 100;
+  min-width: 160px;
+  padding: 6px 0;
+  background: #ffffff;
+  border: 1px solid $teal;
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  line-height: 1.5;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-8px) scaleY(0.9);
+  transform-origin: top center;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+}
+
+/* Invisible bridge over the gap so the menu stays open while moving the mouse to it */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -11px;
+  left: 0;
+  right: 0;
+  height: 11px;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%);
+  transition-delay: 0s;
+}
+
+.nav-dropdown-link,
+.nav-dropdown-link:visited {
+  display: block;
+  padding: 6px 16px;
+  color: $ink;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.nav-dropdown:hover .nav-dropdown-link,
+.nav-dropdown:focus-within .nav-dropdown-link {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger the links as the menu unfolds */
+@for $i from 1 through 4 {
+  .nav-dropdown-link:nth-child(#{$i}) { transition-delay: 0.05s * $i; }
+}
+
+.nav-dropdown-link:hover {
+  background: $teal-tint;
+  color: $dark-teal;
+  text-decoration: none;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown-toggle::after,
+  .nav-dropdown-menu,
+  .nav-dropdown-link {
+    transition: none;
+  }
+}
+
+/* LaTeX logo in the navigation */
+.latex-logo {
+  font-family: 'Times New Roman', Times, serif;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.latex-logo .latex-a {
+  text-transform: uppercase;
+  font-size: 0.75em;
+  vertical-align: 0.25em;
+  margin-left: -0.36em;
+  margin-right: -0.15em;
+}
+
+.latex-logo .latex-e {
+  text-transform: uppercase;
+  vertical-align: -0.5ex;
+  margin-left: -0.1667em;
+  margin-right: -0.125em;
+}
+
+/* On small screens, show dropdown items inline in the hamburger menu */
+@media screen and (max-width: 600px) {
+  .site-nav {
+    background-color: $dark-teal;
+    border-color: $teal;
+  }
+
+  .nav-dropdown {
+    display: block;
+    margin-right: 0;
+    padding-bottom: 4px;
+  }
+
+  /* Group headings: small caps-style labels, not clickable-looking links */
+  .site-nav .nav-dropdown-toggle,
+  .site-nav .nav-dropdown-toggle:hover {
+    display: inline-block;
+    padding-top: 8px;
+    padding-bottom: 2px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    cursor: default;
+  }
+
+  .nav-dropdown-toggle::after {
+    content: none;
+  }
+
+  .nav-dropdown-menu,
+  .nav-dropdown-link,
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    min-width: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    text-align: right;
+  }
+
+  .nav-dropdown-menu::before {
+    content: none;
+  }
+
+  .nav-dropdown-link,
+  .nav-dropdown-link:visited,
+  .nav-dropdown-link:hover {
+    padding: 5px 10px 5px 30px;
+    background: none;
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  .nav-dropdown-link:hover {
+    text-decoration: underline;
+  }
+}
+
 /* Code block styling */
 /* Inline code */
 code {
   background: #f0f8ff;
-  color: #1e5f99;
+  color: $deep-blue;
   padding: 2px 6px;
   border-radius: 3px;
   font-size: 0.9em;
-  border: 1px solid #d1e7f5;
+  border: 1px solid $code-border-light;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
 }
 
 /* Code blocks */
 pre {
-  background: #f5f9fc;
-  border: 1px solid #00a896;
+  background: $code-bg;
+  border: 1px solid $teal;
   border-radius: 6px;
   padding: 16px;
   overflow-x: auto;
-  box-shadow: 0 2px 4px rgba(0, 168, 150, 0.1);
+  box-shadow: 0 2px 4px rgba($teal, 0.1);
 }
 
 pre code {
   background: transparent;
   border: none;
   padding: 0;
-  color: #24292f;
+  color: $ink;
   font-size: 0.9em;
   line-height: 1.5;
 }
 
 /* Syntax highlighting container */
 .highlight {
-  background: #f5f9fc;
+  position: relative;
+  background: $code-bg;
   border-radius: 6px;
   margin: 16px 0;
-  border: 1px solid #00a896;
-  box-shadow: 0 2px 4px rgba(0, 168, 150, 0.1);
+  border: 1px solid $teal;
+  box-shadow: 0 2px 4px rgba($teal, 0.1);
 }
 
 .highlight pre {
@@ -87,9 +294,9 @@ pre code {
 
 /* Add accent color to line numbers */
 .highlight .lineno {
-  color: #0c8599;
+  color: $dark-teal;
   padding-right: 12px;
-  border-right: 1px solid #d1e7f5;
+  border-right: 1px solid $code-border-light;
   margin-right: 12px;
   user-select: none;
 }
@@ -110,19 +317,18 @@ details:hover {
 }
 
 details[open] {
-  background: #f5fbfa;
-  border-color: #00a896;
+  background: $teal-tint;
+  border-color: $teal;
 }
 
 details summary {
-  padding: 12px 16px;
+  padding: 12px 16px 12px 40px;
   cursor: pointer;
   font-weight: 600;
-  color: #24292f;
+  color: $ink;
   list-style: none;
   user-select: none;
   position: relative;
-  padding-left: 40px;
   transition: all 0.2s ease;
 }
 
@@ -148,12 +354,12 @@ details[open] summary::before {
 }
 
 details summary:hover {
-  background: rgba(0, 168, 150, 0.05);
-  color: #0c8599;
+  background: rgba($teal, 0.05);
+  color: $dark-teal;
 }
 
 details summary:hover::before {
-  color: #00a896;
+  color: $teal;
 }
 
 /* Content area styling */
@@ -191,10 +397,6 @@ details .highlight .copy-button {
 }
 
 /* Copy button styling for code blocks */
-.highlight {
-  position: relative;
-}
-
 .highlight .copy-button {
   position: absolute;
   top: 8px;
@@ -205,7 +407,7 @@ details .highlight .copy-button {
   border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
-  color: #24292f;
+  color: $ink;
   cursor: pointer;
   opacity: 0;
   transition: all 0.2s ease;
@@ -218,9 +420,9 @@ details .highlight .copy-button {
 }
 
 .highlight .copy-button:hover {
-  background: #f5fbfa;
-  border-color: #00a896;
-  color: #0c8599;
+  background: $teal-tint;
+  border-color: $teal;
+  color: $dark-teal;
 }
 
 .highlight .copy-button:active {
@@ -229,8 +431,8 @@ details .highlight .copy-button {
 }
 
 .highlight .copy-button.copied {
-  background: #02c39a;
-  border-color: #02c39a;
+  background: $mint;
+  border-color: $mint;
   color: white;
 }
 
@@ -244,33 +446,33 @@ details .highlight .copy-button {
   bottom: 24px;
   right: 24px;
   padding: 12px 20px;
-  background: #00a896;
+  background: $teal;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.3);
+  box-shadow: 0 4px 12px rgba($teal, 0.3);
   transition: all 0.2s ease;
   z-index: 1000;
   user-select: none;
 }
 
 .copy-all-button:hover {
-  background: #0c8599;
-  box-shadow: 0 6px 16px rgba(0, 168, 150, 0.4);
+  background: $dark-teal;
+  box-shadow: 0 6px 16px rgba($teal, 0.4);
   transform: translateY(-2px);
 }
 
 .copy-all-button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0, 168, 150, 0.3);
+  box-shadow: 0 2px 8px rgba($teal, 0.3);
 }
 
 .copy-all-button.copied {
-  background: #02c39a;
-  box-shadow: 0 4px 12px rgba(2, 195, 154, 0.3);
+  background: $mint;
+  box-shadow: 0 4px 12px rgba($mint, 0.3);
 }
 
 .copy-all-button.copied::after {
@@ -287,25 +489,25 @@ details .highlight .copy-button {
 .cta-button:visited {
   display: inline-block;
   padding: 16px 36px;
-  background: linear-gradient(90deg, #1e5f99 0%, #0c8599 50%, #00a896 100%);
+  background: linear-gradient(90deg, $deep-blue 0%, $dark-teal 50%, $teal 100%);
   color: #ffffff;
   font-size: 1.25em;
   font-weight: 600;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.3);
+  box-shadow: 0 4px 12px rgba($teal, 0.3);
   transition: all 0.2s ease;
 }
 
 .cta-button:hover {
   color: #ffffff;
   text-decoration: none;
-  box-shadow: 0 6px 16px rgba(0, 168, 150, 0.4);
+  box-shadow: 0 6px 16px rgba($teal, 0.4);
   transform: translateY(-2px);
 }
 
 .cta-button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0, 168, 150, 0.3);
+  box-shadow: 0 2px 8px rgba($teal, 0.3);
 }
 
 /* Dark mode support */
@@ -317,7 +519,7 @@ details .highlight .copy-button {
 
   details[open] {
     background: #0d1117;
-    border-color: #00a896;
+    border-color: $teal;
   }
 
   details summary {
@@ -325,8 +527,8 @@ details .highlight .copy-button {
   }
 
   details summary:hover {
-    background: rgba(0, 168, 150, 0.1);
-    color: #02c39a;
+    background: rgba($teal, 0.1);
+    color: $mint;
   }
 
   details summary::before {
@@ -334,14 +536,6 @@ details .highlight .copy-button {
   }
 
   details summary:hover::before {
-    color: #00a896;
-  }
-
-  .copy-all-button {
-    background: #00a896;
-  }
-
-  .copy-all-button:hover {
-    background: #0c8599;
+    color: $teal;
   }
 }
