@@ -49,6 +49,10 @@ kramdown:
     default_lang: plaintext
 sass:
   style: compressed
+  sourcemap: never
+  # minima 2.5 is written in older Sass; hide its deprecation warnings
+  quiet_deps: true
+  silence_deprecations: [import]
 
 # Exclude from processing.
 # The following items will not be processed, by default.

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rouge"
+
 module Jekyll
   # {% highlight_file assets/commentsys.sty latex %}
   #
@@ -22,17 +24,12 @@ module Jekyll
       raise IOError, "highlight_file: #{@path} not found" unless File.file?(file)
 
       code = File.read(file, :encoding => "UTF-8").strip
-      formatter = Jekyll::Utils::Rouge.html_formatter(
-        :wrap         => false,
-        :css_class    => "highlight",
-        :gutter_class => "gutter",
-        :code_class   => "code"
-      )
       lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+      html = Rouge::Formatters::HTML.new.format(lexer.lex(code))
 
       # Same markup as {% highlight %}, so the copy buttons and styles apply
-      "<figure class=\"highlight\"><pre><code class=\"language-#{@lang}\" data-lang=\"#{@lang}\">" \
-        "#{formatter.format(lexer.lex(code)).chomp}</code></pre></figure>"
+      %(<figure class="highlight"><pre><code class="language-#{@lang}" data-lang="#{@lang}">) +
+        %(#{html.chomp}</code></pre></figure>)
     end
   end
 end

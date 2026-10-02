@@ -5,17 +5,12 @@ source "https://rubygems.org"
 #
 #     bundle exec jekyll serve
 #
-# Versions are pinned to what the github-pages gem used before, so the output is unchanged.
-gem "jekyll", "~> 3.10.0"
-gem "minima", "2.5.1"
-gem "kramdown", "2.4.0"
-gem "kramdown-parser-gfm", "~> 1.1"
-# Needed by `jekyll serve` on Ruby 3
-gem "webrick", "~> 1.8"
+gem "jekyll", "~> 4.4"
+gem "minima", "~> 2.5"
 
 group :jekyll_plugins do
-  gem "jekyll-feed", "0.17.0"
-  gem "jekyll-seo-tag", "2.8.0"
+  gem "jekyll-feed", "~> 0.17"
+  gem "jekyll-seo-tag", "~> 2.8"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
