@@ -33,6 +33,22 @@ github_username:  ostpopcorn
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+
+# Settings the github-pages gem used to apply for us, kept so the output is unchanged
+future: true
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  gfm_quirks: paragraph_end
+  math_engine: mathjax
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: plaintext
+sass:
+  style: compressed
 
 # Exclude from processing.
 # The following items will not be processed, by default.

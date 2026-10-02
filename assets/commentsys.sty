@@ -1,0 +1,136 @@
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]% \NewDocumentCommand is in the kernel from here on
+\ProvidesPackage{commentsys}[2026/10/02 Commentsys package]
+
+
+% Global switch to enable or disable all output of the package.
+% Defined (as empty) = enabled, undefined = disabled.
+\def\commentsys@global@enable{}
+\newcommand{\enablecommentsys}{\def\commentsys@global@enable{}}
+\newcommand{\disablecommentsys}{\let\commentsys@global@enable\undefined}
+
+\DeclareOption{enable}{\enablecommentsys}
+\DeclareOption{disable}{\disablecommentsys}
+\DeclareOption*{\PackageWarning{commentsys}{Unknown option `\CurrentOption'}}
+
+\ProcessOptions\relax
+
+
+\RequirePackage{soul}% highlighting
+\RequirePackage{xcolor}
+\RequirePackage[breakable,skins]{tcolorbox}
+\RequirePackage{etoolbox}
+\RequirePackage{marginnote}
+
+
+\NewDocumentCommand{\ifcommentsysenable}{mm}{%
+    \ifdefined\commentsys@global@enable
+        #1%
+    \else
+        #2%
+    \fi
+}
+
+
+% Name-clash detection: \registercommenter{xy} defines \xy, \ixy and \mxy,
+% so refuse to register if any of them already exists.
+\newif\ifcommentsys@clash
+\newcommand*{\commentsys@checkname}[2]{%
+    % #1 = control sequence name to check, #2 = commenter name
+    \ifcsname #1\endcsname
+        \commentsys@clashtrue
+        \PackageError{commentsys}{%
+            Cannot register commenter `#2':\MessageBreak
+            \@backslashchar#1 is already defined%
+        }{%
+            \string\registercommenter{#2} would define \@backslashchar#2,
+            \@backslashchar i#2 and \@backslashchar m#2.\MessageBreak
+            Choose a name for which none of these exist.%
+        }%
+    \fi
+}
+
+
+% \registercommenter{<name>}[<full name>]{<initials>}{<color>}
+%   #1  command name: defines \<name>, \i<name> and \m<name>
+%   #2  full name shown in the box title (optional, defaults to the initials)
+%   #3  initials, used in the inline/margin tag and the comment number
+%   #4  base color
+% Register commenters in the preamble.
+\NewDocumentCommand{\registercommenter}{m O{} m m}{%
+    \commentsys@clashfalse
+    \commentsys@checkname{#1}{#1}%
+    \commentsys@checkname{i#1}{#1}%
+    \commentsys@checkname{m#1}{#1}%
+    \ifcommentsys@clash\else
+        \commentsys@register{#1}{#2}{#3}{#4}%
+    \fi
+}
+
+\newcommand{\commentsys@register}[4]{%
+    \newcounter{commentsys@#1}%
+    \ifstrempty{#2}%
+        {\csdef{commentsys@title@#1}{\textbf{#3}}}%
+        {\csdef{commentsys@title@#1}{\textbf{#2}}}%
+    \csdef{thecommentsys@#1}{#3.\arabic{commentsys@#1}}%
+    % Deferred so cleveref can be loaded before or after commentsys. This must
+    % be begindocument/before (not \AtBeginDocument): cleveref builds its
+    % reference formats in its own \AtBeginDocument code, which would run first.
+    \AddToHook{begindocument/before}{%
+        \ifdefined\crefname
+            \crefname{commentsys@#1}{Comment}{Comments}%
+        \fi
+    }%
+    % Block comment: \<name>[<subtitle>]{<text>}
+    \expandafter\NewDocumentCommand\csname #1\endcsname{o +m}{%
+        \ifdefined\commentsys@global@enable
+            % Outside the group so a \label after the command still works.
+            \refstepcounter{commentsys@#1}%
+            % \tikzexternaldisable only makes local assignments, so the group
+            % restores whatever externalization state the user had before.
+            \begingroup
+                \ifcsname tikz@library@external@loaded\endcsname
+                    \tikzexternaldisable
+                \fi
+                \begin{tcolorbox}[%
+                    title=\csname commentsys@title@#1\endcsname
+                        \IfNoValueF{##1}{ --- \textbf{##1}}%
+                        \hfill(\small\textbf{\csname thecommentsys@#1\endcsname}),
+                    colback=#4!5!white,
+                    colframe=#4!75!black,
+                    left=5pt, right=5pt, top=0pt, bottom=0pt,
+                    breakable, skin=enhanced]%
+                    ##2%
+                \end{tcolorbox}%
+            \endgroup
+        \else
+            \@bsphack\@esphack
+        \fi
+    }%
+    % Inline comment: \i<name>{<text>}
+    \expandafter\NewDocumentCommand\csname i#1\endcsname{m}{%
+        \ifdefined\commentsys@global@enable
+            \commentsys@tag{#3}{#4}%
+            % soul cannot highlight citations, so the text itself is only colored.
+            \textcolor{#4}{{ ##1}}%
+        \else
+            \@bsphack\@esphack
+        \fi
+    }%
+    % Margin comment: \m<name>{<text>}
+    \expandafter\NewDocumentCommand\csname m#1\endcsname{m}{%
+        \ifdefined\commentsys@global@enable
+            \marginnote{%
+                \commentsys@tag{#3}{#4}%
+                \textcolor{#4}{{ ##1}}%
+            }%
+        \else
+            \@bsphack\@esphack
+        \fi
+    }%
+}
+
+% Highlighted initials tag shared by the inline and margin commands.
+% #1 = initials, #2 = color
+\newcommand{\commentsys@tag}[2]{%
+    \textcolor{white}{\sethlcolor{#2!75!black}\hl{\,\textbf{#1}:\,}}%
+}

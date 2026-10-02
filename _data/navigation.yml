@@ -5,6 +5,8 @@
       url: /latex/math-macros/
     - title: Tikz Macros
       url: /latex/tikz-macros/
+    - title: Comment System
+      url: /latex/commentsys/
 - title: Tools
   children:
     - title: BibTeX Tools
