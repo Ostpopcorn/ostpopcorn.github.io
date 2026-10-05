@@ -7,6 +7,8 @@
       url: /latex/tikz-macros/
     - title: Comment System
       url: /latex/commentsys/
+    - title: IEEEtran Preamble
+      url: /latex/ieeetran-preamble/
 - title: Tools
   children:
     - title: BibTeX Tools
