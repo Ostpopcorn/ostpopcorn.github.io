@@ -1,5 +1,6 @@
 % Example document for the screenshots on /latex/commentsys/.
-% Compile with: pdflatex example.tex   (commentsys.sty must be on the TeX path)
+% Compile twice with: pdflatex example.tex   (commentsys.sty must be on the TeX path;
+% the margin note needs the second run to get its position)
 \documentclass{article}
 \usepackage[a4paper, textwidth=11cm, marginparwidth=3.5cm]{geometry}
 \usepackage{lipsum}
@@ -15,14 +16,14 @@
 \section{Introduction}
 
 \lipsum[1][1-4]
-The gain is 3~dB\iadr{check this number}.
+The gain is 3~dB\iadr[Gain]{check this number}.
 \lipsum[1][5-8]\madr{Rephrase?}
 
-\adr[Introduction]{Should we cite the 2024 survey here?}
+\badr[Introduction]{Should we cite the 2024 survey here?}
 
 \lipsum[2][1-5]
 
-\rev{The claims in this section are not supported by the results. Please add a comparison with the baseline.}
+\srev[Results]{The claims in this section are not supported by the results. Please add a comparison with the baseline.}
 
 \lipsum[3][1-3]
 
