@@ -67,6 +67,7 @@ The same document then compiles without a trace of the comments:
 The screenshots come from [this example document]({{ '/assets/commentsys-images/example.tex' | relative_url }}).
 
 Requires a LaTeX kernel from 2021-06-01 or later.
+Released under the MIT license, so use it, change it and share it as you like.
 
 <details>
 <summary>The complete code</summary>
